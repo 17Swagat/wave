@@ -1,10 +1,11 @@
 import customtkinter as ctk
-import cv2 as cv
-from PIL import Image, ImageTk
-from tkinter import Canvas
+from appsettings import *
+from menu import Menu
+from videoNdcontrol import WebCamView
 
 WINDOW_HEIGHT = 600
 WINDOW_WIDTH = 1000
+
 
 class App(ctk.CTk):
     def __init__(self):
@@ -13,6 +14,7 @@ class App(ctk.CTk):
         self.geometry(f'{WINDOW_WIDTH}x{WINDOW_HEIGHT}')
         self.resizable(False, False)
         self.title('Wave')
+        self.init_parameters()
         
         # layout
         self.columnconfigure(0, weight=2, uniform='a')
@@ -21,31 +23,17 @@ class App(ctk.CTk):
 
         # cv settings & vid showing
         self.webcamView = WebCamView(self)
+        self.menu = Menu(self, self.mouse_smoothness)
 
         # run
         self.mainloop()
     
-
-class WebCamView(Canvas):
-    def __init__(self, parent):
-        super().__init__(master=parent, background='yellow',
-                         bd=0, highlightthickness=0,
-                         relief='ridge')
-        self.grid(row=0, column=1, sticky='news')
-        self.cap = cv.VideoCapture(0)
-        self.update_frame()
-
-    def update_frame(self):
-        ret, frame = self.cap.read()
-        if ret:
-            self.delete('all')
-            frame = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
-            frame = cv.resize(frame, (self.winfo_width(), self.winfo_height()))
-            frame_tk = ImageTk.PhotoImage(Image.fromarray(frame))
-            self.create_image(0, 0, image=frame_tk, anchor='nw')
-            self.img = frame_tk  # Store a reference to prevent garbage collection
-        self.after(10, self.update_frame)
-
+    def init_parameters(self):
+        self.mouse_smoothness = ctk.IntVar(value=DEFAULT_MOUSE_SMOOTHNESS)
+        self.mouse_smoothness.trace('w', self.change_mouse_smoothness)
+    
+    def change_mouse_smoothness(self, *args):
+        pass
 
 # main
 if __name__ == '__main__':
