@@ -1,17 +1,16 @@
 import customtkinter as ctk
 from appsettings import *
 from menu import Menu
-from videoNdcontrol import WebCamView
-
-WINDOW_HEIGHT = 600
-WINDOW_WIDTH = 1000
-
+# from videoNdcontrol import WebCamView
+from vid_nd_control import WebCamView
 
 class App(ctk.CTk):
     def __init__(self):
         # ctk settings
         super().__init__()
-        self.geometry(f'{WINDOW_WIDTH}x{WINDOW_HEIGHT}')
+        x_offset = int(WINDOW_WIDTH//4) #int((SCREEN_WIDTH // 2) - (WINDOW_WIDTH // 2))
+        y_offset = int(WINDOW_HEIGHT//4) #int((SCREEN_HEIGHT // 2) - (WINDOW_HEIGHT // 2))
+        self.geometry(f'{WINDOW_WIDTH}x{WINDOW_HEIGHT}+{x_offset}+{y_offset}')
         self.resizable(False, False)
         self.title('Wave')
         self.init_parameters()
@@ -22,7 +21,7 @@ class App(ctk.CTk):
         self.rowconfigure(0, weight=1)
 
         # cv settings & vid showing
-        self.webcamView = WebCamView(self)
+        self.webcamView = WebCamView(self, self.mouse_smoothness)
         self.menu = Menu(self, self.mouse_smoothness)
 
         # run
