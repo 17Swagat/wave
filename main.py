@@ -22,16 +22,22 @@ class App(ctk.CTk):
 
         # cv settings & vid showing
         self.webcamView = WebCamView(self, self.mouse_smoothness)
-        self.menu = Menu(self, self.mouse_smoothness)
+        self.menu = Menu(self, self.mouse_smoothness, self.video_on_off)
 
         # run
         self.mainloop()
     
     def init_parameters(self):
         self.mouse_smoothness = ctk.IntVar(value=DEFAULT_MOUSE_SMOOTHNESS)
+        self.video_on_off = ctk.StringVar(value='on')
+        
         self.mouse_smoothness.trace('w', self.change_mouse_smoothness)
+        self.video_on_off.trace('w', self.turn_on_off_video)
     
     def change_mouse_smoothness(self, *args):
+        pass
+
+    def turn_on_off_video(self, *args):
         pass
 
 # main

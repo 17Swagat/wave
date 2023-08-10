@@ -35,6 +35,11 @@ DARK_GREY = '#4a4a4a'
 CLOSE_RED = '#8a0606'
 SLIDER_BG = '#64676b' 
 
+# Font
+FONT_1 = 'Calibri'
+FONT_2 = 'Helvetica'
+BUTTON_FONT_SIZE = 15
+
 # Temporary
 plocX, plocY = 0, 0 # previous (X, Y) coordinates (Mouse-Pointer)
 clocX, clocY = 0, 0 # current  (X, Y) coordinates (Mouse-Pointer)
