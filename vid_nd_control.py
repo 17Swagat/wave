@@ -19,19 +19,22 @@ model_dict = pickle.load(open('./model.p', 'rb'))
 model = model_dict['model']
 
 class WebCamView(Canvas):
-    def __init__(self, parent, mouse_smoothness):
+    def __init__(self, parent, 
+                 mouse_smoothness,
+                 video_on_off,
+                 handlandmarks_on_off,
+                 pccontrol_on_off):
         super().__init__(master=parent, background='#242424', bd=0, highlightthickness=0, relief='ridge')
         
         self.VIDEOFRAME_WIDTH = self.winfo_width()
         self.VIDEOFRAME_HEIGHT = self.winfo_width()
 
-        # self.plocX, self.plocY = 0, 0 # previous (X, Y) coordinates (Mouse-Pointer)
-        # self.clocX, self.clocY = 0, 0 # current  (X, Y) coordinates (Mouse-Pointer)
-
         self.mouse_smoothness = mouse_smoothness
         
-        self.grid(row=0, column=1, sticky='news')
-        if FUNCTIONING_ON['on']:
+        self.grid(row=0, column=1, sticky='news', padx=40, pady=55)
+        
+        # if SHOW_VIDEO: 
+        if video_on_off.get():
             self.cap = cv.VideoCapture(0)
             self.update_frame()
 
@@ -47,12 +50,19 @@ class WebCamView(Canvas):
         if ret:
             self.delete('all')
             frame = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
-            self.isHandsDetected, self.handsCount = self.check_hands(frame) # bool, num => e.g-> True, 2
+
+            if SHOW_HANDLANDMARKS:
+                # bool, num 
+                self.isHandsDetected, self.handsCount = self.check_hands(frame) 
+            
             # Video (with gesture visualization) :=>
+            # if SHOW_VIDEO:
             frame = cv.resize(frame, (self.winfo_width(), self.winfo_height()))
             frame_tk = ImageTk.PhotoImage(Image.fromarray(frame))
             self.create_image(0, 0, image=frame_tk, anchor='nw')
             self.img = frame_tk  # Store a reference to prevent garbage collection
+            # else:
+            #     pass
         
         self.after(1, self.update_frame)
 
@@ -108,7 +118,7 @@ class WebCamView(Canvas):
                     1.3, (0, 0, 0), 3,cv.LINE_AA)
             
             # FUNCTIONING_ON = False
-            if (FUNCTIONING_ON)['on']:
+            if (FUNCTIONING_ON):
 
                 # self.perform_function(predicted_handSign=predicted_label)
                 

@@ -1,10 +1,18 @@
 import pyautogui
 
+# FUNCTION CONTROLS
+SHOW_VIDEO = True
+SHOW_HANDLANDMARKS = False
+FUNCTIONING_ON = False # 0 -> Off, 1 -> On
+
+
 WINDOW_HEIGHT = 600
 WINDOW_WIDTH = 1000
 SCREEN_WIDTH, SCREEN_HEIGHT  = pyautogui.size()
-FUNCTIONING_ON = {'on':True, 'off':False}
-SHOW_HANDLANDMARKS = True
+THEME = {
+    'Dark': 'dark',
+    'Light': 'light',
+}
 DEFAULT_MOUSE_SMOOTHNESS = 4 #10
 HANDSIGN = {
     0:  'Fist',               #    OFF
