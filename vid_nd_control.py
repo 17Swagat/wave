@@ -90,9 +90,11 @@ class WebCamView(Canvas):
             handsCount = len(results.multi_hand_landmarks) # 1 or 2
             # drawing hands
             for hand_landmarks in results.multi_hand_landmarks:
-                mp_drawing.draw_landmarks(img, hand_landmarks, mp_hands.HAND_CONNECTIONS,
-                                          mp_drawing_styles.get_default_hand_landmarks_style(),
-                                          mp_drawing_styles.get_default_hand_connections_style())
+                
+                if self.handlandmarks_on_off.get():
+                    mp_drawing.draw_landmarks(img, hand_landmarks, mp_hands.HAND_CONNECTIONS,
+                                            mp_drawing_styles.get_default_hand_landmarks_style(),
+                                            mp_drawing_styles.get_default_hand_connections_style())
                 for i in range(len(hand_landmarks.landmark)):
                     x = hand_landmarks.landmark[i].x
                     y = hand_landmarks.landmark[i].y
@@ -104,32 +106,35 @@ class WebCamView(Canvas):
                     self.data_aux.append(x - min(self.x_))
                     self.data_aux.append(y - min(self.y_))
             
-            # BBox coordinates
-            # 1. top-left
-            H, W, _=  img.shape
-            x1 = int(min(self.x_) * W) - 10
-            y1 = int(min(self.y_) * H) - 10
-            # 2. bottom-rself.ight
-            x2 = int(max(self.x_) * W) - 10
-            y2 = int(max(self.y_) * H) - 10
-            cv.rectangle(img, 
-                         (x1, y1), 
-                         (x2, y2), 
-                         (0, 0, 0), 
-                         4)
+            if self.handlandmarks_on_off.get():
+                # BBox coordinates
+                # 1. top-left
+                H, W, _=  img.shape
+                x1 = int(min(self.x_) * W) - 10
+                y1 = int(min(self.y_) * H) - 10
+                # 2. bottom-rself.ight
+                x2 = int(max(self.x_) * W) - 10
+                y2 = int(max(self.y_) * H) - 10
+                cv.rectangle(img, 
+                            (x1, y1), 
+                            (x2, y2), 
+                            (0, 0, 0), 
+                            4)
+                
+                # Gesture prediction
+                prediction = model.predict([np.asarray(self.data_aux)])
+                predicted_label = HANDSIGN[int(prediction[0])]
+                # predicted-label-text
+                cv.putText(img, 
+                        predicted_label, 
+                        (x1, y1 - 10), 
+                        cv.FONT_HERSHEY_SIMPLEX, 
+                        1.3, (0, 0, 0), 3,cv.LINE_AA)
             
-            # Gesture prediction
-            prediction = model.predict([np.asarray(self.data_aux)])
-            predicted_label = HANDSIGN[int(prediction[0])]
-            # predicted-label-text
-            cv.putText(img, 
-                    predicted_label, 
-                    (x1, y1 - 10), 
-                    cv.FONT_HERSHEY_SIMPLEX, 
-                    1.3, (0, 0, 0), 3,cv.LINE_AA)
             
             # FUNCTIONING_ON = False
-            if (FUNCTIONING_ON):
+            # if (FUNCTIONING_ON):
+            if (self.pccontrol_on_off.get()):
 
                 # self.perform_function(predicted_handSign=predicted_label)
                 
