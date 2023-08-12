@@ -2,7 +2,7 @@ import pyautogui
 
 # FUNCTION CONTROLS
 SHOW_VIDEO = True
-SHOW_HANDLANDMARKS = False
+SHOW_HANDLANDMARKS = True
 FUNCTIONING_ON = False # 0 -> Off, 1 -> On
 
 
@@ -15,21 +15,21 @@ THEME = {
 }
 DEFAULT_MOUSE_SMOOTHNESS = 4 #10
 HANDSIGN = {
-    0:  'Fist',               #    OFF
+    0:  'DO NOTHING',               #    OFF
     1:  'Closed-Palm',        #    ON
-    2:  'Open-Palm',          # *  WIN + TAB
-    3:  'Pointing',           # *  MOUSE POINTING 
-    4:  'Point-Right(Thumb)', # *  (WEB): TAB-RIGHT
-    5:  'Point-Left(Thumb)',  # *  (WEB): TAB-LEFT
+    2:  'WIN + TAB',#'Open-Palm',          # *  WIN + TAB
+    3:  'POINTING',           # *  MOUSE POINTING 
+    4:  'RIGHT TAB',#'Point-Right(Thumb)', # *  (WEB): TAB-RIGHT
+    5:  'LEFT TAB',#'Point-Left(Thumb)',  # *  (WEB): TAB-LEFT
     
     # N eed to remove
-    6:  'Close-YO',           #    SCREENSHOT
-    7:  'Open-YO',            # *  WIN + D
+    6:  'SCREENSHOT',#'Close-YO',           #    SCREENSHOT
+    7:  'MINIMIZE APP',#'Open-YO',            # *  WIN + D
     
-    8:  'Pinky',              #    (ESC)
-    9:  'Mouse-Click',        # *  MOUSE-CLICK
-    10: 'Thumbs-Up',         # *  (WEB) SCROLL-UP
-    11: 'Thumbs-Down',       # *  (WEB) SCROLL-DOWN
+    8:  'ESC',              #    (ESC)
+    9:  'MOUSE-CLICK',        # *  MOUSE-CLICK
+    10: 'SCROLL UP', #'Thumbs-Up',         # *  (WEB) SCROLL-UP
+    11: 'SCROLL DOWN', #'Thumbs-Down',       # *  (WEB) SCROLL-DOWN
 }
 
 FRAME_REDUCTION=100

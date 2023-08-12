@@ -42,8 +42,8 @@ class App(ctk.CTk):
         # initializing tk variables
         # self.videoOnOff_var = ctk.StringVar(value='on')
         self.videoOnOff_var = ctk.BooleanVar(value=True)
-        self.handlandmarkOnOff_var = ctk.BooleanVar(value=False)
-        self.pccontrol_var = ctk.BooleanVar(value=False)
+        self.handlandmarkOnOff_var = ctk.BooleanVar(value=True)#False)
+        self.pccontrol_var = ctk.BooleanVar(value=False)#False)
         self.mouseSmoothness_var = ctk.IntVar(value=DEFAULT_MOUSE_SMOOTHNESS)
         
         # tracing
@@ -62,16 +62,20 @@ class App(ctk.CTk):
 
     def turn_on_off_video(self, *args):
         # print(self.videoOnOff_var.get())
-        SHOW_VIDEO = self.videoOnOff_var.get()
-        print('xxxx: ', self.videoOnOff_var.get())
+        # SHOW_VIDEO = self.videoOnOff_var.get()
+        # print('xxxx: ', self.videoOnOff_var.get())
+        pass
 
     def show_handlandmarks(self, *args):
         # print(self.handlandmarkOnOff_var.get())
-        SHOW_HANDLANDMARKS = self.handlandmarkOnOff_var.get()
+        # SHOW_HANDLANDMARKS = self.handlandmarkOnOff_var.get()
+        # print('yyyy: ', self.handlandmarkOnOff_var.get())
+        pass
 
     def pccontrol_func(self, *args):
-        FUNCTIONING_ON = self.pccontrol_var.get()
-        # print(self.pccontrol_var.get())
+        # FUNCTIONING_ON = self.pccontrol_var.get()
+        # print('zzzz: ', self.pccontrol_var.get())
+        pass
 
 # main
 if __name__ == '__main__':

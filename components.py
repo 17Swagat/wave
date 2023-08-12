@@ -54,7 +54,7 @@ class OnOffSwitchPanel(ComponentFrame):
                      fg_color=SLIDER_BG,
                     #  progress_color='grey',
                     #  command=lambda: print(data_var.get()),
-                    command=show_video,
+                    # command=show_video,
                      variable= showVideo,
                      switch_width=38,
                      switch_height=19,

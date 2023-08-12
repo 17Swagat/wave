@@ -30,11 +30,17 @@ class WebCamView(Canvas):
         self.VIDEOFRAME_HEIGHT = self.winfo_width()
 
         self.mouse_smoothness = mouse_smoothness
+        self.video_on_off = video_on_off
+        self.handlandmarks_on_off = handlandmarks_on_off
+        self.pccontrol_on_off = pccontrol_on_off
         
         self.grid(row=0, column=1, sticky='news', padx=40, pady=55)
         
         # if SHOW_VIDEO: 
-        if video_on_off.get():
+        # if video_on_off.get():
+        # if SHOW_VIDEO: 
+        if self.video_on_off.get():  # "GETS EXECUTED ONCE!!"
+            # print(self.video_on_off.get())
             self.cap = cv.VideoCapture(0)
             self.update_frame()
 
@@ -44,6 +50,11 @@ class WebCamView(Canvas):
         self.x_ = []
         self.y_ = []
 
+        if self.video_on_off.get() == False:
+            self.grid_forget()
+        elif self.video_on_off.get() == True:
+            self.grid(row=0, column=1, sticky='news', padx=40, pady=55)
+        
         ret, frame = self.cap.read()
         # H, W, _=  frame.shape
 
