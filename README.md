@@ -4,7 +4,7 @@ The Wave application, a graphical user interface (GUI) program built using Pytho
 
 
 
-https://github.com/17Swagat/wave/assets/72545910/5a058d3d-cf12-404c-8584-84b874c8e23d
+https://github.com/17Swagat/wave/assets/72545910/7fc69810-2d12-438d-bcfe-24005815cde8
 
 
 
